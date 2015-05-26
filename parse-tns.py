@@ -40,7 +40,6 @@ def parse_tns(var="", specific=""):
                 num_of_parenthesis += 1
             elif text[index] == ')':
                 num_of_parenthesis -= 1
-                pass
             index += 1
             if num_of_parenthesis == 0:  # if == 0, we found all parenthesis for tns entry
                 break
