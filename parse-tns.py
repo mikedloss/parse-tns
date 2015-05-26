@@ -14,9 +14,16 @@ def parse_tns(var="", specific=""):
     """
     tns = ""
     if var == "":
-        with open(os.environ.get('TNS_ADMIN') + "/tnsnames.ora", "r") as tnsnames:
-            for each in tnsnames:
-                tns += each
+        if os.environ.get('TNS_ADMIN') is None:
+            raise Exception('Cannot find TNS_ADMIN as system variable')
+        else:
+            try:
+                tnsnames = open(os.environ.get('TNS_ADMIN') + "/tnsnames.ora", "r")
+            except IOError as err:
+                raise IOError('Cannot find tnsnames.ora in TNS_ADMIN location')
+            else:
+                for each in tnsnames:
+                    tns += each
     else:
         if type(var) is file:
             with var as tnsnames:
