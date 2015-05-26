@@ -72,11 +72,10 @@ def parse_tns(var="", specific=""):
             # creates a regex statement to find any instance of 'each' in any of the keys
             reg = re.compile(".*(" + each + ").*")
             # searched the 'list_of_keys' for any instance of 'each' and returns the first instance
-            # why the first instance? because a 'tnsnames.ora' file is formatted to only have 1 entry per database,
-            #   instead of multiple entries per database.
             found = [m.group() for i in list_of_keys for m in [reg.search(i)] if m]
             if found:
-                found_list.append(found[0])
+                for every in found:
+                    found_list.append(every)
 
         for each in found_list:
             database_specific[each] = all_databases[each]
